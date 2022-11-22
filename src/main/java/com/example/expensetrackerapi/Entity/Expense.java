@@ -1,17 +1,19 @@
 package com.example.expensetrackerapi.Entity;
 
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
 @Table(name = "tbl_expenses")
 @AllArgsConstructor
-@RequiredArgsConstructor
-@Getter
-@Setter
+@NoArgsConstructor
+@Data
 public class Expense {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +29,13 @@ public class Expense {
     private String category;
 
     private Date date;
+
+    @Column(name = "create_at" , nullable = false , updatable = false)
+    @CreationTimestamp
+    private Timestamp CreationTime ;
+
+    @Column(name = "update_at" , nullable = false , updatable = true)
+    @UpdateTimestamp
+    private Timestamp UpdateTime ;
 
 }

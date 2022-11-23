@@ -1,11 +1,13 @@
 package com.example.expensetrackerapi.Service;
 
 import com.example.expensetrackerapi.Entity.Expense;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface ExpenseServiceI {
-    List<Expense> getAllExpenses() ;
+    Page<Expense> getAllExpenses(Pageable page) ;
 
     Expense getExpenseById(Long id) ;
 

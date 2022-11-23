@@ -3,6 +3,8 @@ package com.example.expensetrackerapi.controller;
 import com.example.expensetrackerapi.Entity.Expense;
 import com.example.expensetrackerapi.Service.ExpenseService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,8 @@ public class ExpenseController {
     private final ExpenseService expenseService;
 
     @GetMapping("/expenses")
-    public List<Expense> getAllExpenses() {
-        return expenseService.getAllExpenses();
+    public List<Expense> getAllExpenses(Pageable page) {
+        return expenseService.getAllExpenses(page).toList(); // sort=fieldName,desc  to sort from biggest to smallest
     }
 
     @GetMapping("/expenses/{id}")

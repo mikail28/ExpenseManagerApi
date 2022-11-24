@@ -2,12 +2,12 @@ package com.example.expensetrackerapi.Service;
 
 import com.example.expensetrackerapi.Entity.Expense;
 import com.example.expensetrackerapi.Repository.ExpenseRepository;
+import com.example.expensetrackerapi.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,7 +26,7 @@ public class ExpenseService implements ExpenseServiceI{
        if (expense.isPresent()){
            return expense.get() ;
        }else {
-           throw new RuntimeException("Expense is not found for the id"+id) ;
+           throw new ResourceNotFoundException("Expense is not found for the id"+id) ;
        }
     }
 

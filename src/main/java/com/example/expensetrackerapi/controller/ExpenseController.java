@@ -43,4 +43,5 @@ public class ExpenseController {
     public Expense updateExpense(@RequestParam("id") Long id, @RequestBody Expense expense) {
         return expenseService.updateExpense(id, expense);
     }
+
 }

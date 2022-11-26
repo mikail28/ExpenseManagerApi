@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.sql.Date;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -50,6 +52,28 @@ public class ExpenseService implements ExpenseServiceI{
         existingExpense.setDate(expense.getDate() != null ? expense.getDate() : existingExpense.getDate());
         existingExpense.setDescription(expense.getDescription() != null ? expense.getDescription() : existingExpense.getDescription());
         return expenseRepository.save(existingExpense) ;
+    }
+
+    @Override
+    public List<Expense> getByCategory(String category, Pageable pageable) {
+        return expenseRepository.findByCategory(category , pageable).toList();
+    }
+
+    @Override
+    public List<Expense> getByName(String name, Pageable page) {
+        return expenseRepository.findByNameContaining(name , page).toList();
+    }
+
+    @Override
+    public List<Expense> getByDateBetween(Date startDate, Date endDate, Pageable page) {
+        if (startDate == null){
+            startDate = new Date(0);
+        }
+        if (endDate == null){
+            endDate = new Date(System.currentTimeMillis());
+        }
+        return expenseRepository.findByDateBetween(startDate,endDate,page).toList();
+
     }
 
 

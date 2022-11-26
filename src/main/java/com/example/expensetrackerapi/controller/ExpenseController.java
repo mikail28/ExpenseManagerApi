@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.util.List;
 
 @RestController
@@ -43,6 +44,25 @@ public class ExpenseController {
     @PutMapping("/expenses")
     public Expense updateExpense(@RequestParam("id") Long id, @RequestBody Expense expense) {
         return expenseService.updateExpense(id, expense);
+    }
+
+    @GetMapping("/expenses/category")
+    public List<Expense> getExpensesByCategory(@RequestParam String category, Pageable pageable) {
+        return expenseService.getByCategory(category, pageable);
+    }
+
+    @GetMapping("/expenses/name")
+    public List<Expense> getExpensesByName(@RequestParam String name, Pageable pageable) {
+        return expenseService.getByName(name, pageable);
+    }
+
+    @GetMapping("/expenses/date")
+    public List<Expense> getExpenseByDateBetween(
+            @RequestParam(required = false) Date startDate,
+            @RequestParam(required = false) Date endDate,
+            Pageable pageable) {
+        return expenseService.getByDateBetween(startDate , endDate , pageable);
+
     }
 
 }

@@ -53,7 +53,9 @@ public class ExpenseController {
 
     @GetMapping("/expenses/name")
     public List<Expense> getExpensesByName(@RequestParam String name, Pageable pageable) {
+        int mika = 100 ;
         return expenseService.getByName(name, pageable);
+
     }
 
     @GetMapping("/expenses/date")
@@ -62,6 +64,9 @@ public class ExpenseController {
             @RequestParam(required = false) Date endDate,
             Pageable pageable) {
         return expenseService.getByDateBetween(startDate , endDate , pageable);
+
+
+
 
     }
 
